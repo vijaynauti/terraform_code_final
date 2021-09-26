@@ -1,0 +1,16 @@
+---
+- name: This sets up an httpd webserver
+  hosts: webserver
+  become: true
+  tasks:
+  - name: Install apache packages 
+    yum:
+      name: httpd
+      state: present
+  - name: ensure httpd is running
+    service:
+      name: httpd 
+      state: started
+  - copy:
+      src: /home/ec2-user/application-code/webserver/angular/my-flight/
+      dest: /var/www/html/
